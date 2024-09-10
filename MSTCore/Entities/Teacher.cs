@@ -8,9 +8,12 @@ namespace MSTCore.Entities
 {
     public class Teacher
     {
-        public int TeacherId { get; set; }
-        public string Name { get; set; }
+        public int TeacherID { get; set; }
+        public string TName { get; set; }
         public string Education { get; set; }
-        public ICollection<Course> Courses { get; set; }
+
+        public int CourseID { get; set; }
+        public Course Courses { get; set; }
     }
 }
+

@@ -8,9 +8,14 @@ namespace MSTCore.Entities
 {
     public class Student
     {
-        public int StudentId { get; set; }
+        public int StudentID { get; set; }
         public string Name { get; set; }
-        public string Course { get; set; }
-        public string Email { get; set; }
+        public string PersonalDetail { get; set; }
+        public string EducationDetail { get; set; }
+        public string FeesDetail { get; set; }
+
+        public int CourseID { get; set; }
+        public Course Courses { get; set; }
     }
 }
+

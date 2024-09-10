@@ -8,11 +8,13 @@ namespace MSTCore.Entities
 {
     public class Course
     {
-        public int CourseId { get; set; }
+        public int CourseID { get; set; }
         public string CourseName { get; set; }
         public decimal Fees { get; set; }
         public int Duration { get; set; }
-        public int TeacherId { get; set; }
-        public Teacher Teacher { get; set; }
+
+        public ICollection<Teacher> Teachers { get; set; }
+        public ICollection<Student> Students { get; set; }
     }
 }
+

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MSTCore.Entities
 {
-  public class Admin
+    public class Admin
     {
         public int AdminID { get; set; }
         public string LoginName { get; set; }
         public string Password { get; set; }
-
+        public string Name { get; set; }
     }
 }

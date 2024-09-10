@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTCore", "MSTCore\MSTCore.csproj", "{26A03278-CD36-41E8-B501-A303F89C5B73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSTCore", "MSTCore\MSTCore.csproj", "{26A03278-CD36-41E8-B501-A303F89C5B73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTRepository", "MSTRepository\MSTRepository.csproj", "{CD6EC3FB-6E17-4070-9EB6-3C4C122B05D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSTRepository", "MSTRepository\MSTRepository.csproj", "{CD6EC3FB-6E17-4070-9EB6-3C4C122B05D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTService", "MSTService\MSTService.csproj", "{FFE597AA-99B9-45FE-BAE9-F7B4612ADA63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSTService", "MSTService\MSTService.csproj", "{FFE597AA-99B9-45FE-BAE9-F7B4612ADA63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTAPI", "MSTAPI\MSTAPI.csproj", "{B1EFA70A-30B6-476A-80EA-A9045F27640F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSTAPI", "MSTAPI\MSTAPI.csproj", "{B1EFA70A-30B6-476A-80EA-A9045F27640F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
