@@ -48,9 +48,15 @@ namespace MSTRepository.Repositories
             return await _dbSet.Where(predicate).ToListAsync();
         }
 
-        public Task SaveAsync()
+        // SaveAsync metodunun implementasyonu burada
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();  // Veritabanına yapılan değişiklikleri kaydediyor
+        }
+
+        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.FirstOrDefaultAsync(predicate);
         }
     }
 }

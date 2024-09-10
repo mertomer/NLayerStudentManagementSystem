@@ -34,11 +34,21 @@ namespace MSTAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Student>> AddStudent(Student student)
+        public async Task<ActionResult<StudentDto>> AddStudent(StudentDto studentDto)
         {
+            var student = new Student
+            {
+                Name = studentDto.Name,
+                PersonalDetail = studentDto.PersonalDetail,
+                EducationDetail = studentDto.EducationDetail,
+                FeesDetail = studentDto.FeesDetail,
+                CourseID = studentDto.CourseID
+            };
+
             await _studentService.AddStudent(student);
-            return CreatedAtAction(nameof(GetStudent), new { id = student.StudentID }, student);
+            return CreatedAtAction(nameof(GetStudent), new { id = student.StudentID }, studentDto);
         }
+
 
         [HttpPut("{id}")]
         public IActionResult UpdateStudent(int id, Student student)

@@ -1,6 +1,6 @@
 ﻿using MSTCore.Entities;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace MSTService
 {
@@ -8,6 +8,7 @@ namespace MSTService
     {
         Task<IEnumerable<Admin>> GetAllAdmins();
         Task<Admin> GetAdminById(int id);
+        Task<Admin> GetAdminByLogin(string loginName);  // Bu metodu ekledik
         Task AddAdmin(Admin admin);
         void UpdateAdmin(Admin admin);
         void DeleteAdmin(Admin admin);

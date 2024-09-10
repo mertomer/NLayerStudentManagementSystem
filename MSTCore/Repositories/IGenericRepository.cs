@@ -13,6 +13,10 @@ namespace MSTRepository
         void Update(T entity);
         void Delete(T entity);
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
+
         Task SaveAsync();
+
+        // FirstOrDefaultAsync metodunu ekliyoruz
+        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
     }
 }
