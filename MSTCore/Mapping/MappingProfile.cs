@@ -8,6 +8,7 @@ namespace MSTAPI
     {
         public MappingProfile()
         {
+            //new
             CreateMap<Student, StudentDto>().ReverseMap();
 
             CreateMap<Teacher, TeacherDto>().ReverseMap();
