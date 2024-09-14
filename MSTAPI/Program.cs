@@ -1,17 +1,17 @@
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using MSTCore.Entities;
 using MSTRepository;
 using MSTService;
-using System.Globalization;
 using System.Reflection;
 using MSTCore.UnitOfWorks;
 using MSTRepository.UnitOfWorks;
 using MSTRepository.Repositories;
+using AutoMapper;
+using MSTAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+// Veritabaný baðlamýný (AppDbContext) ekliyoruz
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
@@ -20,9 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(x =>
     });
 });
 
-// Repository ve Service katmanlarýný Dependency Injection ile ekledim
+// Repository ve Service katmanlarýný Dependency Injection ile ekliyoruz
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
@@ -30,7 +29,10 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-// Controller'larý ekleyelim
+// AutoMapper yapýlandýrmasý
+builder.Services.AddAutoMapper(typeof(MappingProfile)); // MappingProfile'ý ekliyoruz
+
+// Controller'larý ekliyoruz
 builder.Services.AddControllers();
 
 // Swagger/OpenAPI yapýlandýrmasý
@@ -49,4 +51,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
 app.Run();

@@ -1,0 +1,27 @@
+﻿<form method="post" action="/Student/AddStudent">
+    <div class="mb-3">
+        <label for="name" class="form-label">Öğrenci Adı</label>
+        <input type="text" class="form-control" id="name" name="Name" required>
+    </div>
+    <div class="mb-3">
+        <label for="personalDetail" class="form-label">Kişisel Bilgi</label>
+        <input type="text" class="form-control" id="personalDetail" name="PersonalDetail">
+    </div>
+    <div class="mb-3">
+        <label for="educationDetail" class="form-label">Eğitim Bilgisi</label>
+        <input type="text" class="form-control" id="educationDetail" name="EducationDetail">
+    </div>
+    <div class="mb-3">
+        <label for="feesDetail" class="form-label">Ücret Bilgisi</label>
+        <input type="text" class="form-control" id="feesDetail" name="FeesDetail">
+    </div>
+    <!-- Geçerli kursları bir dropdown içinde gösterelim -->
+    <div class="mb-3">
+        <label for="courseID" class="form-label">Kurs Seçin</label>
+        <select class="form-control" id="courseID" name="CourseID">
+            <option value="1">Matematik</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Ekle</button>
+    <a href="/Student/Students" class="btn btn-primary">Öğrenci Listesi</a>
+</form>
