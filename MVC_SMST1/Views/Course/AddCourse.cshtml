@@ -3,8 +3,19 @@
 <form method="post" action="/Course/AddCourse">
     <div class="mb-3">
         <label for="name" class="form-label">Kurs Adı</label>
-        <input type="text" class="form-control" id="name" name="Name" required>
+        <input type="text" class="form-control" id="name" name="CourseName" value="@Model?.CourseName" required>
     </div>
+
+    <div class="mb-3">
+        <label for="fees" class="form-label">Ücret (TL)</label>
+        <input type="number" class="form-control" id="fees" name="Fees" value="@Model?.Fees" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="duration" class="form-label">Süre (Hafta)</label>
+        <input type="number" class="form-control" id="duration" name="Duration" value="@Model?.Duration" required>
+    </div>
+
     <button type="submit" class="btn btn-success">Ekle</button>
     <a href="/Course/Courses" class="btn btn-primary">Kurs Listesi</a>
 </form>

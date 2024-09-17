@@ -1,26 +1,33 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using MSTCore.Entities;
+﻿using MSTCore.Entities;
 using MSTService;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace MSTMVC.Controllers
 {
     public class TeacherController : Controller
     {
         private readonly ITeacherService _teacherService;
+        private readonly ICourseService _courseService;
         private readonly IMapper _mapper;
 
-        public TeacherController(ITeacherService teacherService, IMapper mapper)
+        public TeacherController(ITeacherService teacherService, ICourseService courseService, IMapper mapper)
         {
             _teacherService = teacherService;
+            _courseService = courseService;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public IActionResult AddTeacher()
+        public async Task<IActionResult> AddTeacher()
         {
+            // Kursları CourseService'den alıyoruz
+            var courses = await _courseService.GetAllCourses();
+            var courseDtos = _mapper.Map<IEnumerable<CourseDto>>(courses);
+            ViewBag.Courses = courseDtos;  // Kursları View'e taşıyoruz
+
             return View();
         }
 
@@ -33,6 +40,12 @@ namespace MSTMVC.Controllers
                 await _teacherService.AddTeacher(teacher);
                 return RedirectToAction("Teachers");
             }
+
+            // Post işleminde hata olursa kursları tekrar yüklemek gerekli
+            var courses = await _courseService.GetAllCourses();
+            var courseDtos = _mapper.Map<IEnumerable<CourseDto>>(courses);
+            ViewBag.Courses = courseDtos;
+
             return View(teacherDto);
         }
 

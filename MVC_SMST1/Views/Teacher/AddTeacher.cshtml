@@ -2,17 +2,33 @@
 
 <form method="post" action="/Teacher/AddTeacher">
     <div class="mb-3">
-        <label for="name" class="form-label">Öğretmen Adı</label>
-        <input type="text" class="form-control" id="name" name="Name" required>
+        <label for="tname" class="form-label">Öğretmen Adı</label>
+        <input type="text" class="form-control" id="tname" name="TName" value="@Model?.TName" required>
     </div>
     <div class="mb-3">
-        <label for="personalDetail" class="form-label">Kişisel Bilgi</label>
-        <input type="text" class="form-control" id="personalDetail" name="PersonalDetail">
+        <label for="education" class="form-label">Eğitim Bilgisi</label>
+        <input type="text" class="form-control" id="education" name="Education" value="@Model?.Education">
     </div>
     <div class="mb-3">
-        <label for="educationDetail" class="form-label">Eğitim Bilgisi</label>
-        <input type="text" class="form-control" id="educationDetail" name="EducationDetail">
+        <label for="courseID" class="form-label">Kurs Seçin</label>
+        <select class="form-control" id="courseID" name="CourseID">
+            @if (ViewBag.Courses != null)
+            {
+                @foreach (var course in ViewBag.Courses)
+                {
+                    if (course.CourseID == Model?.CourseID)
+                    {
+                        <option value="@course.CourseID" selected="selected">@course.CourseName</option>
+                    }
+                    else
+                    {
+                        <option value="@course.CourseID">@course.CourseName</option>
+                    }
+                }
+            }
+        </select>
     </div>
+
     <button type="submit" class="btn btn-success">Ekle</button>
     <a href="/Teacher/Teachers" class="btn btn-primary">Öğretmen Listesi</a>
 </form>

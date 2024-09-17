@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<TeacherDto>
 
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -16,6 +15,8 @@
             <thead>
                 <tr>
                     <th>Öğretmen Adı</th>
+                    <th>Eğitim Bilgisi</th>
+                    <th>Eğitim Verdiği Kurs</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,8 @@
                 {
                     <tr>
                         <td>@teacher.TName</td>
+                        <td>@teacher.Education</td>
+                        <td>@teacher.CourseID</td>
                     </tr>
                 }
             </tbody>
