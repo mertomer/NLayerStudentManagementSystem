@@ -1,4 +1,11 @@
-﻿<form method="post" action="/Student/AddStudent">
+﻿@{
+    Layout = "_Layout";
+    var courses = ViewData["Courses"] as IEnumerable<CourseDto>;
+}
+
+<h2>Yeni Öğrenci Ekle</h2>
+
+<form method="post" action="/Student/AddStudent">
     <div class="mb-3">
         <label for="name" class="form-label">Öğrenci Adı</label>
         <input type="text" class="form-control" id="name" name="Name" required>
@@ -15,11 +22,20 @@
         <label for="feesDetail" class="form-label">Ücret Bilgisi</label>
         <input type="text" class="form-control" id="feesDetail" name="FeesDetail">
     </div>
-
     <div class="mb-3">
         <label for="courseID" class="form-label">Kurs Seçin</label>
         <select class="form-control" id="courseID" name="CourseID">
-            <option value="1">Matematik</option>
+            @if (courses != null && courses.Any())
+            {
+                foreach (var course in courses)
+                {
+                    <option value="@course.CourseID">@course.CourseName</option>
+                }
+            }
+            else
+            {
+                <option value="">Kurs bulunamadı</option>
+            }
         </select>
     </div>
     <button type="submit" class="btn btn-success">Ekle</button>

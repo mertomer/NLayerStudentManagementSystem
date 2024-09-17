@@ -3,44 +3,39 @@ using Microsoft.AspNetCore.Mvc;
 using MSTCore.Entities;
 using MSTService;
 
-namespace MSTMVC.Controllers
+public class StudentController : Controller
 {
-    public class StudentController : Controller
+    private readonly IStudentService _studentService;
+    private readonly ICourseService _courseService;
+    private readonly IMapper _mapper;
+
+    public StudentController(IStudentService studentService, ICourseService courseService, IMapper mapper)
     {
-        private readonly IStudentService _studentService;
-        private readonly IMapper _mapper;
+        _studentService = studentService;
+        _courseService = courseService;
+        _mapper = mapper;
+    }
 
-        public StudentController(IStudentService studentService, IMapper mapper)
-        {
-            _studentService = studentService;
-            _mapper = mapper;
-        }
+    [HttpGet]
+    public async Task<IActionResult> AddStudent()
+    {
+        var courses = await _courseService.GetAllCourses(); 
+        var courseDtos = _mapper.Map<IEnumerable<CourseDto>>(courses);
+        ViewData["Courses"] = courseDtos ?? new List<CourseDto>(); 
+        return View();
+    }
 
-        [HttpGet]
-        public IActionResult AddStudent()
+    [HttpPost]
+    public async Task<IActionResult> AddStudent(StudentDto studentDto)
+    {
+        if (ModelState.IsValid)
         {
-            return View(); 
+            var student = _mapper.Map<Student>(studentDto);
+            await _studentService.AddStudent(student);
+            return RedirectToAction("Students");
         }
-
-        [HttpPost]
-        public async Task<IActionResult> AddStudent(StudentDto studentDto)
-        {
-            if (ModelState.IsValid) 
-            {
-                var student = _mapper.Map<Student>(studentDto); 
-                await _studentService.AddStudent(student); 
-                return RedirectToAction("Students"); 
-            }
-            return View(studentDto); 
-        }
-
-        
-        [HttpGet]
-        public async Task<IActionResult> Students()
-        {
-            var students = await _studentService.GetAllStudents(); 
-            var studentDtos = _mapper.Map<IEnumerable<StudentDto>>(students); 
-            return View(studentDtos); 
-        }
+        var courses = await _courseService.GetAllCourses();
+        ViewData["Courses"] = _mapper.Map<IEnumerable<CourseDto>>(courses) ?? new List<CourseDto>();
+        return View(studentDto);
     }
 }

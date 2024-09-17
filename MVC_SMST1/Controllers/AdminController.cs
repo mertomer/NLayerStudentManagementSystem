@@ -25,7 +25,6 @@ namespace MSTMVC.Controllers
             var admin = await _adminService.GetAdminByLogin(loginName);
             if (admin != null && admin.Password == password)
             {
-                // Giriş başarılı, AddStudent ekranına yönlendir.
                 return Redirect("/Student/AddStudent");
 
             }

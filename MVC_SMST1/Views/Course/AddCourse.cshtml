@@ -1,0 +1,10 @@
+﻿@model CourseDto
+
+<form method="post" action="/Course/AddCourse">
+    <div class="mb-3">
+        <label for="name" class="form-label">Kurs Adı</label>
+        <input type="text" class="form-control" id="name" name="Name" required>
+    </div>
+    <button type="submit" class="btn btn-success">Ekle</button>
+    <a href="/Course/Courses" class="btn btn-primary">Kurs Listesi</a>
+</form>

@@ -20,7 +20,6 @@ namespace MSTAPI.Controllers
             _mapper = mapper;
         }
 
-        // Tüm öğretmenleri getir
         [HttpGet]
         public async Task<IEnumerable<TeacherDto>> GetTeachers()
         {
@@ -28,7 +27,6 @@ namespace MSTAPI.Controllers
             return _mapper.Map<IEnumerable<TeacherDto>>(teachers);
         }
 
-        // Yeni öğretmen ekle
         [HttpPost]
         public async Task<ActionResult<TeacherDto>> AddTeacher([FromBody] TeacherDto teacherDto)
         {

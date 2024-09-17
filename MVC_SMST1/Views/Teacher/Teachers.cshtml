@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TeacherDto>
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Öğretmen Listesi</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Öğretmen Listesi</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Öğretmen Adı</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var teacher in Model)
+                {
+                    <tr>
+                        <td>@teacher.TName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/Teacher/AddTeacher" class="btn btn-success">Yeni Öğretmen Ekle</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+﻿@model TeacherDto
+
+<form method="post" action="/Teacher/AddTeacher">
+    <div class="mb-3">
+        <label for="name" class="form-label">Öğretmen Adı</label>
+        <input type="text" class="form-control" id="name" name="Name" required>
+    </div>
+    <div class="mb-3">
+        <label for="personalDetail" class="form-label">Kişisel Bilgi</label>
+        <input type="text" class="form-control" id="personalDetail" name="PersonalDetail">
+    </div>
+    <div class="mb-3">
+        <label for="educationDetail" class="form-label">Eğitim Bilgisi</label>
+        <input type="text" class="form-control" id="educationDetail" name="EducationDetail">
+    </div>
+    <button type="submit" class="btn btn-success">Ekle</button>
+    <a href="/Teacher/Teachers" class="btn btn-primary">Öğretmen Listesi</a>
+</form>

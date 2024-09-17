@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
     <title>@ViewData["Title"] - MyMVCApp</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -15,11 +15,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Student" asp-action="Students">Öğrenci Listele</a>
+                        <a href="/Student/Students" class="nav-link">Öğrenci Listele</a>
                     </li>
                     <li class="nav-item">
                         <a href="/Student/AddStudent" class="nav-link">Yeni Öğrenci Ekle</a>
-
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Course/Courses" class="nav-link">Kurs Listele</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Course/AddCourse" class="nav-link">Yeni Kurs Ekle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Teacher/Teachers" class="nav-link">Öğretmen Listele</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Teacher/AddTeacher" class="nav-link">Yeni Öğretmen Ekle</a>
                     </li>
                 </ul>
             </div>
