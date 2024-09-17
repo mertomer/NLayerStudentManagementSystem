@@ -26,7 +26,6 @@ namespace MSTService
 
         public async Task<Admin> GetAdminByLogin(string loginName)
         {
-            // Tek bir admin döndürmek için FirstOrDefaultAsync kullanıyoruz
             return await _adminRepository.FirstOrDefaultAsync(a => a.LoginName == loginName);
         }
 

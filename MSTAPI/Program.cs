@@ -11,6 +11,17 @@ using MSTAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// CORS'u yapýlandýrýyoruz
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 // Veritabaný baðlamýný (AppDbContext) ekliyoruz
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
@@ -47,6 +58,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// CORS'u kullanýyoruz
+app.UseCors("AllowAllOrigins");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

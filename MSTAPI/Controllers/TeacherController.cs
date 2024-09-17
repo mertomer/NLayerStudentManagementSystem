@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using MSTCore.Entities;
 using MSTService;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MSTAPI.Controllers
@@ -12,10 +12,12 @@ namespace MSTAPI.Controllers
     public class TeacherController : ControllerBase
     {
         private readonly ITeacherService _teacherService;
+        private readonly IMapper _mapper;
 
-        public TeacherController(ITeacherService teacherService)
+        public TeacherController(ITeacherService teacherService, IMapper mapper)
         {
             _teacherService = teacherService;
+            _mapper = mapper;
         }
 
         // Tüm öğretmenleri getir
@@ -23,30 +25,14 @@ namespace MSTAPI.Controllers
         public async Task<IEnumerable<TeacherDto>> GetTeachers()
         {
             var teachers = await _teacherService.GetAllTeachers();
-
-            // Entity'den DTO'ya mapleme
-            var teacherDtos = teachers.Select(teacher => new TeacherDto
-            {
-                TName = teacher.TName,
-                Education = teacher.Education,
-                CourseID = teacher.CourseID
-            });
-
-            return teacherDtos;
+            return _mapper.Map<IEnumerable<TeacherDto>>(teachers);
         }
 
         // Yeni öğretmen ekle
         [HttpPost]
-        public async Task<ActionResult<TeacherDto>> AddTeacher(TeacherDto teacherDto)
+        public async Task<ActionResult<TeacherDto>> AddTeacher([FromBody] TeacherDto teacherDto)
         {
-            // DTO'dan Entity'ye mapleme
-            var teacher = new Teacher
-            {
-                TName = teacherDto.TName,
-                Education = teacherDto.Education,
-                CourseID = teacherDto.CourseID
-            };
-
+            var teacher = _mapper.Map<Teacher>(teacherDto);
             await _teacherService.AddTeacher(teacher);
             return CreatedAtAction(nameof(GetTeachers), new { id = teacher.TeacherID }, teacherDto);
         }

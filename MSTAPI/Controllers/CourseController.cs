@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using MSTCore.Entities;
 using MSTService;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MSTAPI.Controllers
@@ -12,39 +12,25 @@ namespace MSTAPI.Controllers
     public class CourseController : ControllerBase
     {
         private readonly ICourseService _courseService;
+        private readonly IMapper _mapper;
 
-        public CourseController(ICourseService courseService)
+        public CourseController(ICourseService courseService, IMapper mapper)
         {
             _courseService = courseService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IEnumerable<CourseDto>> GetCourses()
         {
             var courses = await _courseService.GetAllCourses();
-
-            // Entity'den DTO'ya mapleme
-            var courseDtos = courses.Select(course => new CourseDto
-            {
-                CourseName = course.CourseName,
-                Fees = course.Fees,
-                Duration = course.Duration
-            });
-
-            return courseDtos;
+            return _mapper.Map<IEnumerable<CourseDto>>(courses);
         }
 
         [HttpPost]
-        public async Task<ActionResult<CourseDto>> AddCourse(CourseDto courseDto)
+        public async Task<ActionResult<CourseDto>> AddCourse([FromBody] CourseDto courseDto)
         {
-            // DTO'dan Entity'ye mapleme
-            var course = new Course
-            {
-                CourseName = courseDto.CourseName,
-                Fees = courseDto.Fees,
-                Duration = courseDto.Duration
-            };
-
+            var course = _mapper.Map<Course>(courseDto);
             await _courseService.AddCourse(course);
             return CreatedAtAction(nameof(GetCourses), new { id = course.CourseID }, courseDto);
         }

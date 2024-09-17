@@ -19,7 +19,7 @@ public class AdminController : ControllerBase
         var admin = await _adminService.GetAdminByLogin(loginModel.LoginName); 
         if (admin != null && admin.Password == loginModel.Password)
         {
-            return Ok(new { Token = "dummy-token" }); // JWT token'ı burada üretilebilir
+            return Ok(new { Token = "dummy-token" }); 
         }
         return Unauthorized();
     }

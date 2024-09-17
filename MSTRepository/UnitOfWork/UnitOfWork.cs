@@ -7,7 +7,7 @@ namespace MSTRepository.UnitOfWorks
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _context;
-        private bool _disposed = false; // Kaynak serbest bırakıldı mı kontrolü için flag
+        private bool _disposed = false; 
 
         public UnitOfWork(AppDbContext context)
         {
@@ -24,14 +24,13 @@ namespace MSTRepository.UnitOfWorks
             await _context.SaveChangesAsync();
         }
 
-        // IDisposable.Dispose metodu
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
             {
                 if (disposing)
                 {
-                    _context.Dispose();  // DbContext'i serbest bırak
+                    _context.Dispose();  
                 }
                 _disposed = true;
             }
@@ -40,7 +39,7 @@ namespace MSTRepository.UnitOfWorks
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);  // Garbage Collector'u çağırmaması için finalize'ı baskılar
+            GC.SuppressFinalize(this);  
         }
     }
 }
