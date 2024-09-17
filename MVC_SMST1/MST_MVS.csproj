@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MSTAPI\MSTAPI.csproj" />
+    <ProjectReference Include="..\MSTAPI\MST_API.csproj" />
   </ItemGroup>
 
 </Project>
