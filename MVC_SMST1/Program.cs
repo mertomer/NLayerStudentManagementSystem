@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Veritaban� ba�lant�s�n� appsettings.json'dan al
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IStudentService, StudentService>();

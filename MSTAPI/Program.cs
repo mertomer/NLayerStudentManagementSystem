@@ -11,6 +11,12 @@ using MSTAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// appAPIsettings.json dosyasýný yapýlandýrmaya ekliyoruz
+builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
+{
+    config.AddJsonFile("appAPIsettings.json", optional: false, reloadOnChange: true);
+});
+
 // CORS'u yapýlandýrýyoruz
 builder.Services.AddCors(options =>
 {
@@ -25,7 +31,8 @@ builder.Services.AddCors(options =>
 // Veritabaný baðlamýný (AppDbContext) ekliyoruz
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
+    // "appAPIsettings.json" içindeki "DefaultConnection" ayarýný kullanýyoruz
+    x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), option =>
     {
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
     });

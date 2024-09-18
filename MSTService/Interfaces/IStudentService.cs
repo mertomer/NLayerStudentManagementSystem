@@ -2,14 +2,12 @@
 using System.Threading.Tasks;
 using MSTCore.Entities;
 
-namespace MSTService
+public interface IStudentService
 {
-    public interface IStudentService
-    {
-        Task<IEnumerable<Student>> GetAllStudents();
-        Task<Student> GetStudentById(int id);
-        Task AddStudent(Student student);
-        void UpdateStudent(Student student);
-        void DeleteStudent(Student student);
-    }
+    Task<IEnumerable<Student>> GetAllStudents();
+    Task<Student> GetStudentById(int id);
+    Task AddStudent(Student student);
+    Task UpdateStudent(Student student);
+    Task DeleteStudent(Student student);  // Burada Task olarak düzenliyoruz
 }
+

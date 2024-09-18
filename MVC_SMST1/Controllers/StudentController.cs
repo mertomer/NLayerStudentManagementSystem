@@ -20,28 +20,30 @@ namespace MSTMVC.Controllers
             _mapper = mapper;
         }
 
+        // GET: AddStudent
         [HttpGet]
         public async Task<IActionResult> AddStudent()
         {
-            // Kursları CourseService'den alıyoruz
             var courses = await _courseService.GetAllCourses();
             var courseDtos = _mapper.Map<IEnumerable<CourseDto>>(courses);
-            ViewBag.Courses = courseDtos;  // Kursları View'e taşıyoruz
+            ViewBag.Courses = courseDtos;
 
             return View();
         }
 
+        // POST: AddStudent
         [HttpPost]
         public async Task<IActionResult> AddStudent(StudentDto studentDto)
         {
             if (ModelState.IsValid)
             {
                 var student = _mapper.Map<Student>(studentDto);
+                student.FeesDetail = studentDto.FeesDetail;
+
                 await _studentService.AddStudent(student);
                 return RedirectToAction("Students");
             }
 
-            // Post işleminde hata olursa kursları tekrar yüklemek gerekli
             var courses = await _courseService.GetAllCourses();
             var courseDtos = _mapper.Map<IEnumerable<CourseDto>>(courses);
             ViewBag.Courses = courseDtos;
@@ -49,12 +51,78 @@ namespace MSTMVC.Controllers
             return View(studentDto);
         }
 
+        // GET: Students
         [HttpGet]
         public async Task<IActionResult> Students()
         {
             var students = await _studentService.GetAllStudents();
             var studentDtos = _mapper.Map<IEnumerable<StudentDto>>(students);
             return View(studentDtos);
+        }
+
+        // GET: EditStudent
+        [HttpGet]
+        public async Task<IActionResult> EditStudent(int id)
+        {
+            var student = await _studentService.GetStudentById(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            var studentDto = _mapper.Map<StudentDto>(student);
+
+            var courses = await _courseService.GetAllCourses();
+            var courseDtos = _mapper.Map<IEnumerable<CourseDto>>(courses);
+            ViewBag.Courses = courseDtos;
+
+            return View(studentDto);
+        }
+
+        // POST: EditStudent
+        // POST: EditStudent
+        [HttpPost]
+        public async Task<IActionResult> EditStudent(int id, StudentDto studentDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var student = await _studentService.GetStudentById(id);
+                if (student == null)
+                {
+                    return NotFound();
+                }
+
+                // StudentID'yi değiştirmiyoruz. Diğer bilgileri güncelliyoruz.
+                student.Name = studentDto.Name;
+                student.PersonalDetail = studentDto.PersonalDetail;
+                student.EducationDetail = studentDto.EducationDetail;
+                student.FeesDetail = studentDto.FeesDetail;
+                student.CourseID = studentDto.CourseID; // Yalnızca diğer alanları güncelliyoruz.
+
+                await _studentService.UpdateStudent(student);
+                return RedirectToAction("Students");
+            }
+
+            var courses = await _courseService.GetAllCourses();
+            var courseDtos = _mapper.Map<IEnumerable<CourseDto>>(courses);
+            ViewBag.Courses = courseDtos;
+
+            return View(studentDto);
+        }
+
+
+        // POST: DeleteStudent
+        [HttpPost]
+        public async Task<IActionResult> DeleteStudent(int id)
+        {
+            var student = await _studentService.GetStudentById(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            _studentService.DeleteStudent(student);
+            return RedirectToAction("Students");
         }
     }
 }

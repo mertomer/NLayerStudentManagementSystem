@@ -1,6 +1,6 @@
 ﻿@model StudentDto
 
-<form method="post" action="/Student/AddStudent">
+<form method="post" action="/Student/EditStudent/@Model.StudentID">
     <div class="mb-3">
         <label for="name" class="form-label">Öğrenci Adı</label>
         <input type="text" class="form-control" id="name" name="Name" value="@Model?.Name" required>
@@ -17,7 +17,7 @@
         <label for="feesDetail" class="form-label">Ücret Bilgisi</label>
         <div class="input-group">
             <input type="text" class="form-control" id="feesDetail" name="FeesDetail" value="@Model?.FeesDetail" readonly>
-            <span class="input-group-text">₺</span> <!-- TL Sembolünü Buraya Ekledik -->
+            <span class="input-group-text">₺</span>
         </div>
     </div>
 
@@ -28,14 +28,15 @@
             {
                 @foreach (var course in ViewBag.Courses)
                 {
+
                     <option value="@course.CourseID" data-fees="@course.Fees">@course.CourseName</option>
                 }
             }
         </select>
     </div>
 
-    <button type="submit" class="btn btn-success">Ekle</button>
-    <a href="/Student/Students" class="btn btn-primary">Öğrenci Listesi</a>
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+    <a href="/Student/Students" class="btn btn-secondary">Geri Dön</a>
 </form>
 
 <script>
@@ -43,8 +44,13 @@
         var selectElement = document.getElementById("courseID");
         var selectedOption = selectElement.options[selectElement.selectedIndex];
         var fees = selectedOption.getAttribute("data-fees");
-
-        // Ücret bilgisini Ücret Bilgisi inputuna yaz
+        
+        // Ücret bilgisini 'Ücret Bilgisi' input alanına yaz
         document.getElementById("feesDetail").value = fees;
+    }
+
+    // Sayfa yüklendiğinde mevcut seçili kursun ücretini otomatik olarak göster
+    window.onload = function() {
+        updateFees();
     }
 </script>
