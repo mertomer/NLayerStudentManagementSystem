@@ -31,7 +31,6 @@ namespace MSTMVC.Controllers
             return View();
         }
 
-        // POST: AddStudent
         [HttpPost]
         public async Task<IActionResult> AddStudent(StudentDto studentDto)
         {
@@ -51,7 +50,6 @@ namespace MSTMVC.Controllers
             return View(studentDto);
         }
 
-        // GET: Students
         [HttpGet]
         public async Task<IActionResult> Students()
         {
@@ -60,7 +58,6 @@ namespace MSTMVC.Controllers
             return View(studentDtos);
         }
 
-        // GET: EditStudent
         [HttpGet]
         public async Task<IActionResult> EditStudent(int id)
         {
@@ -79,8 +76,7 @@ namespace MSTMVC.Controllers
             return View(studentDto);
         }
 
-        // POST: EditStudent
-        // POST: EditStudent
+        
         [HttpPost]
         public async Task<IActionResult> EditStudent(int id, StudentDto studentDto)
         {
@@ -92,12 +88,11 @@ namespace MSTMVC.Controllers
                     return NotFound();
                 }
 
-                // StudentID'yi değiştirmiyoruz. Diğer bilgileri güncelliyoruz.
                 student.Name = studentDto.Name;
                 student.PersonalDetail = studentDto.PersonalDetail;
                 student.EducationDetail = studentDto.EducationDetail;
                 student.FeesDetail = studentDto.FeesDetail;
-                student.CourseID = studentDto.CourseID; // Yalnızca diğer alanları güncelliyoruz.
+                student.CourseID = studentDto.CourseID; 
 
                 await _studentService.UpdateStudent(student);
                 return RedirectToAction("Students");
@@ -111,7 +106,6 @@ namespace MSTMVC.Controllers
         }
 
 
-        // POST: DeleteStudent
         [HttpPost]
         public async Task<IActionResult> DeleteStudent(int id)
         {

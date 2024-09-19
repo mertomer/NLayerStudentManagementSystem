@@ -18,14 +18,13 @@ namespace MSTMVC.Controllers
             _mapper = mapper;
         }
 
-        // GET: AddCourse
         [HttpGet]
         public IActionResult AddCourse()
         {
             return View();
         }
 
-        // POST: AddCourse
+        
         [HttpPost]
         public async Task<IActionResult> AddCourse(CourseDto courseDto)
         {
@@ -39,7 +38,6 @@ namespace MSTMVC.Controllers
             return View(courseDto);
         }
 
-        // GET: Courses (Kurs Listesi)
         [HttpGet]
         public async Task<IActionResult> Courses()
         {

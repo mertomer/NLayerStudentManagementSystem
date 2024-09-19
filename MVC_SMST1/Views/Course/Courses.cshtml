@@ -24,7 +24,7 @@
                 {
                     <tr>
                         <td>@course.CourseName</td>
-                        <td>@course.Fees.ToString("C2")</td> <!-- C2 ile TL olarak fiyat formatı -->
+                        <td>@course.Fees.ToString("C2", new System.Globalization.CultureInfo("tr-TR"))</td>  
                         <td>@course.Duration</td>
                     </tr>
                 }
@@ -32,5 +32,10 @@
         </table>
         <a href="/Course/AddCourse" class="btn btn-success">Yeni Kurs Ekle</a>
     </div>
+
+    <script>
+        window.onload = function () {
+        }
+    </script>
 </body>
 </html>

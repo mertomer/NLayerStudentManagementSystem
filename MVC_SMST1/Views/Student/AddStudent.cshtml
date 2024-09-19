@@ -17,7 +17,7 @@
         <label for="feesDetail" class="form-label">Ücret Bilgisi</label>
         <div class="input-group">
             <input type="text" class="form-control" id="feesDetail" name="FeesDetail" value="@Model?.FeesDetail" readonly>
-            <span class="input-group-text">₺</span> <!-- TL Sembolünü Buraya Ekledik -->
+            <span class="input-group-text">₺</span>
         </div>
     </div>
 
@@ -44,7 +44,10 @@
         var selectedOption = selectElement.options[selectElement.selectedIndex];
         var fees = selectedOption.getAttribute("data-fees");
 
-        // Ücret bilgisini Ücret Bilgisi inputuna yaz
         document.getElementById("feesDetail").value = fees;
+    }
+
+    window.onload = function () {
+        updateFees();
     }
 </script>
