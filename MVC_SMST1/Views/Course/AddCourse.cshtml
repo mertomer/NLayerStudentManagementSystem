@@ -1,21 +1,61 @@
 ﻿@model CourseDto
 
-<form method="post" action="/Course/AddCourse">
-    <div class="mb-3">
-        <label for="name" class="form-label">Kurs Adı</label>
-        <input type="text" class="form-control" id="name" name="CourseName" value="@Model?.CourseName" required>
-    </div>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            background-color: #f0f2f5;
+        }
 
-    <div class="mb-3">
-        <label for="fees" class="form-label">Ücret (TL)</label>
-        <input type="number" class="form-control" id="fees" name="Fees" value="@Model?.Fees" required>
-    </div>
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    <div class="mb-3">
-        <label for="duration" class="form-label">Süre (Hafta)</label>
-        <input type="number" class="form-control" id="duration" name="Duration" value="@Model?.Duration" required>
-    </div>
+            .form-container h2 {
+                text-align: center;
+                color: #28a745;
+                margin-bottom: 30px;
+            }
 
-    <button type="submit" class="btn btn-success">Ekle</button>
-    <a href="/Course/Courses" class="btn btn-primary">Kurs Listesi</a>
-</form>
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+    </style>
+    <title>Kurs Ekle</title>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="form-container col-md-6">
+            <h2>Kurs Ekle</h2>
+            <form method="post" action="/Course/AddCourse">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Kurs Adı</label>
+                    <input type="text" class="form-control" id="name" name="CourseName" value="@Model?.CourseName" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fees" class="form-label">Ücret (TL)</label>
+                    <input type="number" class="form-control" id="fees" name="Fees" value="@Model?.Fees" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="duration" class="form-label">Süre (Hafta)</label>
+                    <input type="number" class="form-control" id="duration" name="Duration" value="@Model?.Duration" required>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Ekle</button>
+                <a href="/Course/Courses" class="btn btn-primary w-100 mt-2">Kurs Listesi</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

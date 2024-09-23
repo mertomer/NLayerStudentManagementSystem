@@ -1,22 +1,88 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <title>@ViewData["Title"] - NLayerStudentManagementSystem</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <style>
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .navbar-nav {
+            width: 100%;
+        }
+
+        .nav-item {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            background-color: #495057; /* Link üzerine gelindiğinde geri bildirim */
+            color: #f8f9fa !important;
+            border-radius: 5px;
+        }
+
+        .footer-top {
+            background-color: #343a40;
+            color: white;
+            padding: 40px 0;
+        }
+
+            .footer-top h5 {
+                color: #f8f9fa;
+                margin-bottom: 20px;
+            }
+
+            .footer-top ul {
+                list-style-type: none;
+                padding-left: 0;
+            }
+
+                .footer-top ul li a {
+                    color: #adb5bd;
+                    text-decoration: none;
+                }
+
+                    .footer-top ul li a:hover {
+                        color: #f8f9fa;
+                    }
+
+        .footer-bottom {
+            background-color: #23272b;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+            .footer-bottom a {
+                color: #adb5bd;
+                text-decoration: none;
+            }
+
+                .footer-bottom a:hover {
+                    color: #f8f9fa;
+                }
+    </style>
 </head>
 <body>
     @if (ViewBag.ShowNavbar == null || ViewBag.ShowNavbar == true)
     {
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="#">NLayerStudentManagementSystem</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav justify-content-between">
                     <!-- Öğrenciler Menüsü -->
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Student" asp-action="Students">Öğrenci Listele</a>
+                        <a class="nav-link" href="/Student/Students">Öğrenci Listele</a>
                     </li>
                     <li class="nav-item">
                         <a href="/Student/AddStudent" class="nav-link">Yeni Öğrenci Ekle</a>
@@ -46,11 +112,69 @@
         @RenderBody()
     </div>
 
-    <footer class="footer bg-light mt-4 py-3">
-        <div class="container">
-            <p class="text-muted mb-0 text-center">&copy; 2024 - NLayerStudentManagementSystem</p>
-        </div>
+    <!-- start footer -->
+    <footer>
+        <!-- Footer Top Section -->
+        <section class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <!-- About Us -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 shadow">
+                        <h5 class="text-capitalize">About Us</h5>
+                        <ul>
+                            <li><a href="#">item 1</a></li>
+                            <li><a href="#">item 2</a></li>
+                            <li><a href="#">item 3</a></li>
+                            <li><a href="#">item 4</a></li>
+                        </ul>
+                    </div>
+                    <!-- Useful Links -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 shadow">
+                        <h5 class="text-capitalize">Useful Links</h5>
+                        <ul>
+                            <li><a href="#">item 1</a></li>
+                            <li><a href="#">item 2</a></li>
+                            <li><a href="#">item 3</a></li>
+                            <li><a href="#">item 4</a></li>
+                        </ul>
+                    </div>
+                    <!-- Contact Info -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 shadow">
+                        <h5 class="text-capitalize">Contact Info</h5>
+                        <ul>
+                            <li><a href="#">item 1</a></li>
+                            <li><a href="#">item 2</a></li>
+                            <li><a href="#">item 3</a></li>
+                            <li><a href="#">item 4</a></li>
+                        </ul>
+                    </div>
+                    <!-- Subscribe -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 shadow">
+                        <h5 class="text-capitalize">Subscribe to Our News</h5>
+                        <ul>
+                            <li><a href="#">item 1</a></li>
+                            <li><a href="#">item 2</a></li>
+                            <li><a href="#">item 3</a></li>
+                            <li><a href="#">item 4</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Bottom Section -->
+        <section class="footer-bottom">
+            <div id="copy_right">
+                <p>&copy; All rights reserved. <span id="now_date"></span>  Design: <a href="https://www.linkedin.com/in/mertbakar/" target="_blank" rel="noopener noreferrer">Mert Bakar</a></p>
+
+            </div>
+        </section>
     </footer>
+
+    <script>
+        // Set the current year in the footer
+        document.getElementById("now_date").textContent = new Date().getFullYear();
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
